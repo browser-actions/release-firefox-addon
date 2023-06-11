@@ -26,5 +26,8 @@
     "lint": "eslint --ext .ts src/",
     "lint:fix": "eslint --fix --ext .ts src/"
   },
-  "packageManager": "yarn@3.6.0"
+  "packageManager": "yarn@3.6.0",
+  "engines": {
+    "node": "20.1.0"
+  }
 }

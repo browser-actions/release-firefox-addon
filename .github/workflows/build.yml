@@ -1,0 +1,25 @@
+name: 'Build'
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - master
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'
+          cache: 'yarn'
+      - run: yarn install --immutable
+      - run: yarn lint
+      - run: yarn build
+      - run: yarn package
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: ./dist/
