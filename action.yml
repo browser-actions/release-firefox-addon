@@ -1,0 +1,6 @@
+name: 'Publish Firefox Addon'
+description: "Publish a firefox addon to AMO"
+author: "Shin'ya Ueoka"
+runs:
+  using: 'node16'
+  main: 'index.js'
