@@ -15,6 +15,20 @@ type License =
   | "LGPL-3.0-or-later"
   | "MIT"
   | "BSD-2-Clause";
+export const LICENSE_NAMES = [
+  "all-rights-reserved",
+  "MPL-2.0",
+  "GPL-2.0-or-later",
+  "GPL-3.0-or-later",
+  "LGPL-2.1-or-later",
+  "LGPL-3.0-or-later",
+  "MIT",
+  "BSD-2-Clause",
+];
+export const isLicense = (license: string): license is License => {
+  return LICENSE_NAMES.includes(license);
+};
+
 type Channel = "listed" | "unlisted";
 type Translated = Record<string, string> & { _default?: string };
 

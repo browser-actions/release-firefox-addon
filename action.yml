@@ -1,6 +1,44 @@
-name: 'Publish Firefox Addon'
-description: "Publish a firefox addon to AMO"
+name: 'Publish Firefox add-on'
+description: 'Publish a Firefox add-on to addons.mozilla.org by uploading a zip file with optional source file'
 author: "Shin'ya Ueoka"
+
+inputs:
+  addon-id:
+    description: 'ID of the add-on to be published in numeric or UUID format, or the add-on slug'.
+    required: true
+  addon-path:
+    description: 'Path to the addon file to be published'
+    required: true
+  source-path:
+    description: 'Optional path to the source file of the version.  This is nessesary if the version contains minified, concatenated, or transpiled code.'
+  approval-note:
+    description: 'Optional note to help reviewers such as how to build the addon or how to test with test accounts'
+  compatibility-firefox-min:
+    description: 'Minimum version of Firefox that the version is compatible with'
+  compatibility-firefox-max:
+    description: 'Maximum version of Firefox that the version of the addonon is compatible with'
+  license:
+    description: 'License of the version'
+  release-note:
+    description: 'Information about changes in the new version.  Note that this field supports only locale "en-US".'
+  channel:
+    description: 'Channel to publish the version.  This field supports only "listed" and "unlisted".'
+    default: 'listed'
+  auth-api-issuer:
+    description: 'An API key of the JWT token for authentication'
+    required: true
+  auth-api-secret:
+    description: 'An API secret of the JWT token for authentication'
+    required: true
+
+outputs:
+  version:
+    description: 'Version number of the uploaded version'
+  version-id:
+    description: 'ID of the uploaded version in numeric format'
+  version-edit-url:
+    description: 'URL of the edit page of the uploaded version'
+
 runs:
   using: 'node16'
   main: 'index.js'
