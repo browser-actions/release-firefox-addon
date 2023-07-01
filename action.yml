@@ -7,16 +7,16 @@ inputs:
     description: 'ID of the add-on to be published in numeric or UUID format, or the add-on slug'.
     required: true
   addon-path:
-    description: 'Path to the addon file to be published'
+    description: 'Path to the add-on file to be published'
     required: true
   source-path:
     description: 'Optional path to the source file of the version.  This is nessesary if the version contains minified, concatenated, or transpiled code.'
   approval-note:
-    description: 'Optional note to help reviewers such as how to build the addon or how to test with test accounts'
+    description: 'Optional note to help reviewers such as how to build the add-on or how to test with test accounts'
   compatibility-firefox-min:
     description: 'Minimum version of Firefox that the version is compatible with'
   compatibility-firefox-max:
-    description: 'Maximum version of Firefox that the version of the addonon is compatible with'
+    description: 'Maximum version of Firefox that the version of the add-on is compatible with'
   license:
     description: 'License of the version'
   release-note:
