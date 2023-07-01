@@ -18,21 +18,34 @@ type License =
 type Channel = "listed" | "unlisted";
 type Translated = Record<string, string> & { _default?: string };
 
-type VersionCreateRequest = {
+type CreateVersionRequest = {
   approval_notes?: string;
   compatibility?: Compatibility;
   license?: License;
   custom_license?: {
     name: Translated;
     text: Translated;
-  },
+  };
   release_notes?: Translated;
   source?: string;
   upload?: string;
 };
 
-type VersionCreateResponse = {
-  id: number,
+type UpdateVersionRequest = {
+  approval_notes?: string;
+  compatibility?: Compatibility;
+  is_disabled?: boolean;
+  license?: License;
+  custom_license?: {
+    name: Translated;
+    text: Translated;
+  };
+  release_notes?: Translated;
+  source?: string;
+};
+
+type VersionDetailResponse = {
+  id: number;
   approval_notes: string;
   channel: Channel;
   compatibility: Compatibility;
@@ -48,21 +61,21 @@ type VersionCreateResponse = {
     size: number;
     status: number;
     url: string;
-  },
+  };
   is_disabled: boolean;
   license: {
-    is_custom: boolean,
-    name: Translated,
-    text: Translated,
-    url: string | null,
-    slug: string | null,
-  }
+    is_custom: boolean;
+    name: Translated;
+    text: Translated;
+    url: string | null;
+    slug: string | null;
+  };
   release_notes: Translated;
-  reviewed: string
+  reviewed: string;
   is_strict_compatibility_enabled: boolean;
   source: string | null;
   version: string;
-}
+};
 
 type AMOApiUploadDetailResponse = {
   uuid: string;
@@ -71,102 +84,155 @@ type AMOApiUploadDetailResponse = {
   submitted: string;
   url: string;
   valid: boolean;
-  validation: unknown;
+  validation: unknown; // validation is undocumented
   version: string;
 };
 
-const ORIGIN = "https://addons.mozilla.org";
+const PRODUCTION_ORIGIN = "https://addons.mozilla.org";
 
 export class AMOClient {
-  constructor(
-    private readonly auth: { issuer: string, secret: string },
-  ) {
+  private auth: { issuer: string; secret: string };
+  private origin: string;
+
+  constructor({
+    auth,
+    origin = PRODUCTION_ORIGIN,
+  }: {
+    auth: { issuer: string; secret: string };
+    origin?: string;
+  }) {
+    this.auth = auth;
+    this.origin = origin;
   }
 
   async uploadAddon(
     xpi: ReadStream,
-    channel: Channel,
+    channel: Channel
   ): Promise<AMOApiUploadDetailResponse> {
-    const token = this._getJwtToken();
-    const url = `${ORIGIN}/api/v5/addons/upload/`;
+    const path = `/api/v5/addons/upload/`;
     const form = new FormData();
     form.append("upload", xpi);
     form.append("channel", channel);
 
-    const r = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: "JWT " + token,
-      },
-      body: form,
-    });
-    return (await r.json()) as AMOApiUploadDetailResponse;
+    return this.proceed<AMOApiUploadDetailResponse>(path, "POST", form);
+  }
+
+  async getUpload(uuid: string): Promise<AMOApiUploadDetailResponse> {
+    const path = `/api/v5/addons/upload/${uuid}`;
+
+    return this.proceed<AMOApiUploadDetailResponse>(path, "GET");
   }
 
   async uploadSource(
     addon: number | string,
+    version: string,
     source: ReadStream,
-    upload: string,
     license?: License
-  ): Promise<unknown> {
-    const token = this._getJwtToken();
-    const url = `${ORIGIN}/api/v5/addons/addon/${addon}/versions/`
+  ): Promise<VersionDetailResponse> {
+    const path = `/api/v5/addons/addon/${addon}/versions/${version}/`;
     const form = new FormData();
     form.append("source", source);
-    form.append("upload", upload);
     form.append("license", license);
 
-    const r= await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: "JWT " + token,
-      },
-      body: form,
-    });
-    return (await r.json()) as unknown;
+    return this.proceed<VersionDetailResponse>(path, "PATCH", form);
   }
 
-  async versionCreate(addon: number | string, opts: VersionCreateRequest) {
-    const token = this._getJwtToken();
-    const url = `${ORIGIN}/api/v5/addons/addon/${addon}/versions/`;
+  async createVersion(addon: number | string, opts: CreateVersionRequest) {
+    const path = `/api/v5/addons/addon/${addon}/versions/`;
 
-    const r = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: "JWT " + token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(opts),
-    });
-    return (await r.json()) as VersionCreateResponse;
+    return this.proceed<VersionDetailResponse>(path, "POST", opts);
+  }
+
+  async editVersion(addon: number | string, opts: UpdateVersionRequest) {
+    const path = `/api/v5/addons/addon/${addon}/versions/`;
+
+    return this.proceed<VersionDetailResponse>(path, "PATCH", opts);
   }
 
   async listVersion(addon: number | string): Promise<unknown> {
-    const token = this._getJwtToken();
-    const url = `${ORIGIN}/api/v5/addons/addon/${addon}/versions/`;
+    const path = `/api/v5/addons/addon/${addon}/versions/`;
 
-    const r = await fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: "JWT " + token,
-        "Content-Type": "application/json",
-      },
-    });
-    return (await r.json()) as unknown;
+    return this.proceed<VersionDetailResponse[]>(path, "GET");
   }
 
-  async getVersion(addon: number | string, version: number| string) {
-    const token = this._getJwtToken();
-    const url = `${ORIGIN}/api/v5/addons/addon/${addon}/versions/${version}/`;
+  async getVersion(addon: number | string, version: number | string) {
+    const path = `/api/v5/addons/addon/${addon}/versions/${version}/`;
 
-    const r = await fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: "JWT " + token,
-        "Content-Type": "application/json",
-      },
-    });
-    return (await r.json()) as VersionCreateResponse;
+    return this.proceed<VersionDetailResponse>(path, "GET");
+  }
+
+  async getVersionOrUndefined(
+    addon: number | string,
+    version: number | string
+  ): Promise<VersionDetailResponse | undefined> {
+    const path = `/api/v5/addons/addon/${addon}/versions/${version}/`;
+
+    return this.proceedOrUndefined<VersionDetailResponse>(path, "GET");
+  }
+
+  private async proceed<T>(
+    path: string,
+    method: string,
+    params?: unknown
+  ): Promise<T> {
+    const token = this._getJwtToken();
+    const url = `${this.origin}${path}`;
+    const headers: Record<string, string> = { Authorization: "JWT " + token };
+    let body;
+
+    if (params instanceof FormData) {
+      body = params;
+    } else if (typeof params === "undefined") {
+      body = undefined;
+    } else {
+      body = JSON.stringify(params);
+      headers["Content-Type"] = "application/json";
+    }
+
+    const resp = await fetch(url, { method, headers, body });
+    if (resp.status >= 400) {
+      throw new Error(
+        `Failed to ${method} ${url}: ${resp.status} ${
+          resp.statusText
+        } ${await resp.text()}`
+      );
+    }
+
+    return (await resp.json()) as T;
+  }
+
+  private async proceedOrUndefined<T>(
+    path: string,
+    method: string,
+    params?: unknown
+  ): Promise<T | undefined> {
+    const token = this._getJwtToken();
+    const url = `${this.origin}${path}`;
+    const headers: Record<string, string> = { Authorization: "JWT " + token };
+    let body;
+
+    if (params instanceof FormData) {
+      body = params;
+    } else if (typeof params === "undefined") {
+      body = undefined;
+    } else {
+      body = JSON.stringify(params);
+      headers["Content-Type"] = "application/json";
+    }
+
+    const resp = await fetch(url, { method, headers, body });
+    if (resp.status === 404) {
+      return undefined;
+    }
+    if (resp.status >= 400) {
+      throw new Error(
+        `Failed to ${method} ${url}: ${resp.status} ${
+          resp.statusText
+        } ${await resp.text()}`
+      );
+    }
+
+    return (await resp.json()) as T;
   }
 
   private _getJwtToken() {
