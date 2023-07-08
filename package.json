@@ -1,6 +1,6 @@
 {
   "name": "release-firefox-addon",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Publish a firefox addon to AMO",
   "main": "index.js",
   "repository": "git@github.com:browser-actions/release-firefox-addon.git",
