@@ -12,7 +12,7 @@ The minimal usage is as follows:
 
 ```yaml
 steps:
-- uses: browser-actions/public-firefox-addon@latest
+- uses: browser-actions/publish-firefox-addon@latest
   with:
     addon-id: "please specify your add-on in number or UUID format, or add-on name"
     addon-path: "path/to/your/addon.zip"
