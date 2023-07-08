@@ -1,6 +1,6 @@
 import { AMOClient, LICENSE_NAMES, isLicense } from "./amo";
 import fs from "fs";
-import core from "@actions/core";
+import * as core from "@actions/core";
 import timers from "timers/promises";
 
 const CHECK_ADDON_STATUS_INTERVAL = 3000;
