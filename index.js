@@ -34404,28 +34404,51 @@ exports.AMOClient = AMOClient;
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const amo_1 = __nccwpck_require__(1436);
 const fs_1 = __importDefault(__nccwpck_require__(7147));
-const core_1 = __importDefault(__nccwpck_require__(2186));
+const core = __importStar(__nccwpck_require__(2186));
 const promises_1 = __importDefault(__nccwpck_require__(8670));
 const CHECK_ADDON_STATUS_INTERVAL = 3000;
 const CHECK_ADDON_STATUS_TIMEOUT = 20000;
 async function run() {
-    const addonId = core_1.default.getInput("addon-id");
-    const addonPath = core_1.default.getInput("addon-path");
-    const sourcePath = core_1.default.getInput("source-path") || undefined;
-    const approvalNote = core_1.default.getInput("approval-note") || undefined;
-    const compatibilityFirefoxMin = core_1.default.getInput("compatibility-firefox-min") || undefined;
-    const compatibilityFirefoxMax = core_1.default.getInput("compatibility-firefox-max") || undefined;
-    const license = core_1.default.getInput("license") || undefined;
-    const releaseNote = core_1.default.getInput("release-note");
-    const channel = core_1.default.getInput("channel") || undefined;
-    const authIssuer = core_1.default.getInput("auth-api-issuer");
-    const authSecret = core_1.default.getInput("auth-api-secret");
+    const addonId = core.getInput("addon-id");
+    const addonPath = core.getInput("addon-path");
+    const sourcePath = core.getInput("source-path") || undefined;
+    const approvalNote = core.getInput("approval-note") || undefined;
+    const compatibilityFirefoxMin = core.getInput("compatibility-firefox-min") || undefined;
+    const compatibilityFirefoxMax = core.getInput("compatibility-firefox-max") || undefined;
+    const license = core.getInput("license") || undefined;
+    const releaseNote = core.getInput("release-note");
+    const channel = core.getInput("channel") || undefined;
+    const authIssuer = core.getInput("auth-api-issuer");
+    const authSecret = core.getInput("auth-api-secret");
     if (channel !== "listed" && channel !== "unlisted") {
         throw new Error(`Invalid channel "${channel}".  Must be "listed" or "unlisted"`);
     }
@@ -34440,7 +34463,7 @@ async function run() {
     });
     const addonZip = fs_1.default.createReadStream(addonPath);
     const upload = await client.uploadAddon(addonZip, channel);
-    core_1.default.info(`Addon "${addonPath}" has been uploaded with UUID "${upload.uuid}"`);
+    core.info(`Addon "${addonPath}" has been uploaded with UUID "${upload.uuid}"`);
     for await (const startTime of promises_1.default.setInterval(CHECK_ADDON_STATUS_INTERVAL, Date.now())) {
         const status = await client.getUpload(upload.uuid);
         if (status.processed) {
@@ -34450,7 +34473,7 @@ async function run() {
             throw new Error("timed-out waiting for addon to be processed");
         }
     }
-    core_1.default.info(`Addon "${upload.uuid}" has been processed`);
+    core.info(`Addon "${upload.uuid}" has been processed`);
     let version = await client.getVersionOrUndefined(addonId, upload.version);
     if (typeof version === "undefined") {
         version = await client.createVersion(addonId, {
@@ -34467,27 +34490,27 @@ async function run() {
             },
             upload: upload.uuid,
         });
-        core_1.default.info(`Version "${version.version}" has been created`);
+        core.info(`Version "${version.version}" has been created`);
     }
     else {
-        core_1.default.info(`Version "${version.version}" already exists`);
+        core.info(`Version "${version.version}" already exists`);
     }
     if (sourcePath) {
         const sourceZip = fs_1.default.createReadStream(sourcePath);
         const src = await client.uploadSource(addonId, version.version, sourceZip, "MIT");
-        core_1.default.info(`Source "${sourcePath}" has been uploaded to "${src.source}"`);
+        core.info(`Source "${sourcePath}" has been uploaded to "${src.source}"`);
     }
-    core_1.default.setOutput("version", version.version);
-    core_1.default.setOutput("version-id", version.id);
-    core_1.default.setOutput("version-edit-url", version.edit_url);
-    core_1.default.info(`Version "${version.version}" has been published`);
+    core.setOutput("version", version.version);
+    core.setOutput("version-id", version.id);
+    core.setOutput("version-edit-url", version.edit_url);
+    core.info(`Version "${version.version}" has been published`);
 }
 (async () => {
     try {
         await run();
     }
     catch (error) {
-        core_1.default.setFailed(String(error));
+        core.setFailed(String(error));
     }
 })();
 
