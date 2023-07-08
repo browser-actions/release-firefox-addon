@@ -1,5 +1,5 @@
-name: 'Publish Firefox add-on'
-description: 'Publish a Firefox add-on to addons.mozilla.org by uploading a zip file with optional source file'
+name: 'Release Firefox addon'
+description: 'Release a Firefox add-on to addons.mozilla.org by uploading a zip file with optional source file'
 author: "Shin'ya Ueoka"
 
 inputs:
