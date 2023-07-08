@@ -1,8 +1,8 @@
 <p>
-  <a href="https://github.com/browser-actions/publish-firefox-addon/actions/workflows/release.yml"><img alt="typescript-action status" src="https://github.com/browser-actions/publish-firefox-addon/actions/workflows/release.yml/badge.svg"></a>
+  <a href="https://github.com/browser-actions/release-firefox-addon/actions/workflows/release.yml"><img alt="typescript-action status" src="https://github.com/browser-actions/release-firefox-addon/actions/workflows/release.yml/badge.svg"></a>
 </p>
 
-# publish-firefox-addon
+# release-firefox-addon
 
 This action publishes a Firefox add-on to the AMO (addons.mozilla.org).
 
@@ -12,7 +12,7 @@ The minimal usage is as follows:
 
 ```yaml
 steps:
-- uses: browser-actions/publish-firefox-addon@latest
+- uses: browser-actions/release-firefox-addon@latest
   with:
     addon-id: "please specify your add-on in number or UUID format, or add-on name"
     addon-path: "path/to/your/addon.zip"
