@@ -4,7 +4,7 @@ author: "Shin'ya Ueoka"
 
 inputs:
   addon-id:
-    description: 'ID of the add-on to be published in numeric or UUID format, or the add-on slug'.
+    description: 'ID of the add-on to be published in numeric or UUID format, or the add-on slug.'
     required: true
   addon-path:
     description: 'Path to the add-on file to be published'
