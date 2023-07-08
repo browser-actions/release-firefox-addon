@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/browser-actions/publish-firefox-addon/compare/publish-firefox-addon-v0.1.1...publish-firefox-addon-v0.1.2) (2023-07-08)
+
+
+### Bug Fixes
+
+* fix actions import ([08d2c1d](https://github.com/browser-actions/publish-firefox-addon/commit/08d2c1ddfe342ae437c489b20e9bf99d49550e5c))
+
 ## [0.1.1](https://github.com/browser-actions/publish-firefox-addon/compare/publish-firefox-addon-v0.1.0...publish-firefox-addon-v0.1.1) (2023-07-08)
 
 
