@@ -91,7 +91,7 @@ async function run(): Promise<void> {
       addonId,
       version.version,
       sourceZip,
-      "MIT"
+      license,
     );
     core.info(`Source "${sourcePath}" has been uploaded to "${src.source}"`);
   }
