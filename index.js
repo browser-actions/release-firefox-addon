@@ -34497,7 +34497,7 @@ async function run() {
     }
     if (sourcePath) {
         const sourceZip = fs_1.default.createReadStream(sourcePath);
-        const src = await client.uploadSource(addonId, version.version, sourceZip, "MIT");
+        const src = await client.uploadSource(addonId, version.version, sourceZip, license);
         core.info(`Source "${sourcePath}" has been uploaded to "${src.source}"`);
     }
     core.setOutput("version", version.version);
