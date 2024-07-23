@@ -1,7 +1,6 @@
 import type { ReadStream } from "node:fs";
 import FormData from "form-data";
 import jwt from "jsonwebtoken";
-import fetch from "node-fetch";
 import { v4 as uuidv4 } from "uuid";
 
 type VersionRange = { min?: string; max?: string };
