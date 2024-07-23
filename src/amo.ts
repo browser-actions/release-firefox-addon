@@ -1,8 +1,8 @@
+import type { ReadStream } from "node:fs";
 import FormData from "form-data";
+import jwt from "jsonwebtoken";
 import fetch from "node-fetch";
 import { v4 as uuidv4 } from "uuid";
-import type { ReadStream } from "fs";
-import jwt from "jsonwebtoken";
 
 type VersionRange = { min?: string; max?: string };
 type Compatibility = Record<string, VersionRange> | Array<string>;
@@ -121,9 +121,9 @@ export class AMOClient {
 
   async uploadAddon(
     xpi: ReadStream,
-    channel: Channel
+    channel: Channel,
   ): Promise<AMOApiUploadDetailResponse> {
-    const path = `/api/v5/addons/upload/`;
+    const path = "/api/v5/addons/upload/";
     const form = new FormData();
     form.append("upload", xpi);
     form.append("channel", channel);
@@ -141,7 +141,7 @@ export class AMOClient {
     addon: number | string,
     version: string,
     source: ReadStream,
-    license?: License
+    license?: License,
   ): Promise<VersionDetailResponse> {
     const path = `/api/v5/addons/addon/${addon}/versions/${version}/`;
     const form = new FormData();
@@ -177,7 +177,7 @@ export class AMOClient {
 
   async getVersionOrUndefined(
     addon: number | string,
-    version: number | string
+    version: number | string,
   ): Promise<VersionDetailResponse | undefined> {
     const path = `/api/v5/addons/addon/${addon}/versions/${version}/`;
 
@@ -187,12 +187,12 @@ export class AMOClient {
   private async proceed<T>(
     path: string,
     method: string,
-    params?: unknown
+    params?: unknown,
   ): Promise<T> {
     const token = this._getJwtToken();
     const url = `${this.origin}${path}`;
-    const headers: Record<string, string> = { Authorization: "JWT " + token };
-    let body;
+    const headers: Record<string, string> = { Authorization: `JWT ${token}` };
+    let body: string | FormData | undefined;
 
     if (params instanceof FormData) {
       body = params;
@@ -208,7 +208,7 @@ export class AMOClient {
       throw new Error(
         `Failed to ${method} ${url}: ${resp.status} ${
           resp.statusText
-        } ${await resp.text()}`
+        } ${await resp.text()}`,
       );
     }
 
@@ -218,12 +218,12 @@ export class AMOClient {
   private async proceedOrUndefined<T>(
     path: string,
     method: string,
-    params?: unknown
+    params?: unknown,
   ): Promise<T | undefined> {
     const token = this._getJwtToken();
     const url = `${this.origin}${path}`;
-    const headers: Record<string, string> = { Authorization: "JWT " + token };
-    let body;
+    const headers: Record<string, string> = { Authorization: `JWT ${token}` };
+    let body: string | FormData | undefined;
 
     if (params instanceof FormData) {
       body = params;
@@ -242,7 +242,7 @@ export class AMOClient {
       throw new Error(
         `Failed to ${method} ${url}: ${resp.status} ${
           resp.statusText
-        } ${await resp.text()}`
+        } ${await resp.text()}`,
       );
     }
 

@@ -1,0 +1,15 @@
+{
+  "files": {
+    "ignore": ["./dist/", "package.json"]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  }
+}
