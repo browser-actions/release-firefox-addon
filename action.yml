@@ -40,5 +40,5 @@ outputs:
     description: 'URL of the edit page of the uploaded version'
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'index.js'
