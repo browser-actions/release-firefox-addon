@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/browser-actions/release-firefox-addon/compare/release-firefox-addon-v0.2.0...release-firefox-addon-v0.2.1) (2024-07-26)
+
+
+### Bug Fixes
+
+* fix request error ([#21](https://github.com/browser-actions/release-firefox-addon/issues/21)) ([9eb188a](https://github.com/browser-actions/release-firefox-addon/commit/9eb188a8ce93a82ba38960e99c508026422121ad))
+
 ## [0.2.0](https://github.com/browser-actions/release-firefox-addon/compare/release-firefox-addon-v0.1.4...release-firefox-addon-v0.2.0) (2024-07-23)
 
 
