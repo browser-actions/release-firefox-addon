@@ -41,7 +41,7 @@ async function run(): Promise<void> {
     },
   });
 
-  const addonZip = fs.createReadStream(addonPath);
+  const addonZip = await fs.openAsBlob(addonPath);
   const upload = await client.uploadAddon(addonZip, channel);
 
   core.info(
@@ -86,7 +86,7 @@ async function run(): Promise<void> {
   }
 
   if (sourcePath) {
-    const sourceZip = fs.createReadStream(sourcePath);
+    const sourceZip = await fs.openAsBlob(sourcePath);
     const src = await client.uploadSource(
       addonId,
       version.version,

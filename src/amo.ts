@@ -1,5 +1,3 @@
-import type { ReadStream } from "node:fs";
-import FormData from "form-data";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 
@@ -119,12 +117,12 @@ export class AMOClient {
   }
 
   async uploadAddon(
-    xpi: ReadStream,
+    xpi: Blob,
     channel: Channel,
   ): Promise<AMOApiUploadDetailResponse> {
     const path = "/api/v5/addons/upload/";
     const form = new FormData();
-    form.append("upload", xpi);
+    form.append("upload", xpi, "addon.zip");
     form.append("channel", channel);
 
     return this.proceed<AMOApiUploadDetailResponse>(path, "POST", form);
@@ -139,12 +137,12 @@ export class AMOClient {
   async uploadSource(
     addon: number | string,
     version: string,
-    source: ReadStream,
+    source: Blob,
     license?: License,
   ): Promise<VersionDetailResponse> {
     const path = `/api/v5/addons/addon/${addon}/versions/${version}/`;
     const form = new FormData();
-    form.append("source", source);
+    form.append("source", source, "source.zip");
     form.append("license", license);
 
     return this.proceed<VersionDetailResponse>(path, "PATCH", form);
