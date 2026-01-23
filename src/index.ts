@@ -28,7 +28,7 @@ async function run(): Promise<void> {
   }
   if (typeof license !== "undefined" && !isLicense(license)) {
     throw new Error(
-      `Invalid license "${license}".  Must be one of: ${Object.keys(
+      `Invalid license "${license}".  Must be one of: ${Object.values(
         LICENSE_NAMES,
       ).join(", ")}`,
     );
