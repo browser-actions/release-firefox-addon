@@ -26,6 +26,6 @@
     "lint:fix": "biome check --write ."
   },
   "engines": {
-    "node": "20.1.0"
+    "node": ">=24.0.0"
   }
 }
