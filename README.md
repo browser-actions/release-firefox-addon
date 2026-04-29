@@ -66,6 +66,10 @@ All supported outputs are the following:
 | `version-id`       | 'ID of the uploaded version in numeric format. |
 | `version-edit-url` | 'URL of the edit page of the uploaded version. |
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, workflow, and release process.
+
 ## License
 
 [MIT](LICENSE)
