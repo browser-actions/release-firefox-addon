@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/browser-actions/release-firefox-addon/compare/release-firefox-addon-v0.2.1...release-firefox-addon-v0.2.2) (2026-05-06)
+
+
+### Bug Fixes
+
+* update Node.js runtime to v24 LTS ([#30](https://github.com/browser-actions/release-firefox-addon/issues/30)) ([a2aa495](https://github.com/browser-actions/release-firefox-addon/commit/a2aa495dbf0786158a6faefb63155e7f9574b35d))
+
 ## [0.2.1](https://github.com/browser-actions/release-firefox-addon/compare/release-firefox-addon-v0.2.0...release-firefox-addon-v0.2.1) (2024-07-26)
 
 
