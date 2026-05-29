@@ -26,7 +26,7 @@ If your add-on includes minified files or transpiled files, you should submit yo
 
 ```yaml
 steps:
-- uses: browser-actions/public-firefox-addon@latest
+- uses: browser-actions/release-firefox-addon@latest
   with:
     addon-id: "please specify your add-on in number or UUID format, or add-on name"
     addon-path: "path/to/your/addon.zip"
@@ -52,7 +52,7 @@ All supported options are the following:
 | `compatibility-firefox-max` | Maximum version of Firefox that the version of the add-on is compatible with.                                                            |          |          |
 | `license`                   | License of the version.  You can see available licenses [here](https://addons-server.readthedocs.io/en/latest/topics/api/licenses.html). |          |          |
 | `release-note`              | Information about changes in the new version.  Note that this field supports only locale "en-US".                                        |          |          |
-| `channel`                   | 'Channel to publish the version.  This field supports only "listed" and "unlisted".                                                      |          | `listed` |
+| `channel`                   | Channel to publish the version.  This field supports only "listed" and "unlisted".                                                       |          | `listed` |
 | `auth-api-issuer`           | An API key of the JWT token for authentication.                                                                                          | Yes      |          |
 | `auth-api-secret`           | An API secret of the JWT token for authentication.                                                                                       | Yes      |          |
 
@@ -60,11 +60,11 @@ All supported options are the following:
 
 All supported outputs are the following:
 
-| Name               | Description                                    |
-| ---                | ---                                            |
-| `version`          | 'Version number of the uploaded version.       |
-| `version-id`       | 'ID of the uploaded version in numeric format. |
-| `version-edit-url` | 'URL of the edit page of the uploaded version. |
+| Name               | Description                                   |
+| ---                | ---                                           |
+| `version`          | Version number of the uploaded version.       |
+| `version-id`       | ID of the uploaded version in numeric format. |
+| `version-edit-url` | URL of the edit page of the uploaded version. |
 
 ## Contributing
 
