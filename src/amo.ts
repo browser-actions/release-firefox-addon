@@ -6,21 +6,27 @@ type Compatibility = Record<string, VersionRange> | Array<string>;
 type License =
   | "all-rights-reserved"
   | "MPL-2.0"
-  | "GPL-2.0-or-later"
-  | "GPL-3.0-or-later"
-  | "LGPL-2.1-or-later"
-  | "LGPL-3.0-or-later"
+  | "Apache-2.0"
+  | "GPL-2.0-only"
+  | "GPL-3.0-only"
+  | "LGPL-2.1-only"
+  | "LGPL-3.0-only"
+  | "AGPL-3.0-only"
   | "MIT"
-  | "BSD-2-Clause";
+  | "BSD-2-Clause"
+  | "Unlicense";
 export const LICENSE_NAMES = [
   "all-rights-reserved",
   "MPL-2.0",
-  "GPL-2.0-or-later",
-  "GPL-3.0-or-later",
-  "LGPL-2.1-or-later",
-  "LGPL-3.0-or-later",
+  "Apache-2.0",
+  "GPL-2.0-only",
+  "GPL-3.0-only",
+  "LGPL-2.1-only",
+  "LGPL-3.0-only",
+  "AGPL-3.0-only",
   "MIT",
   "BSD-2-Clause",
+  "Unlicense",
 ];
 export const isLicense = (license: string): license is License => {
   return LICENSE_NAMES.includes(license);
