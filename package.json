@@ -8,16 +8,15 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^2.6.4",
-    "@types/jsonwebtoken": "^9.0.2",
-    "@types/node": "^26.6.6",
-    "@types/uuid": "^9.0.2"
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.6.6"
   },
   "dependencies": {
-    "@actions/core": "^1.10.0",
+    "@actions/core": "^3.0.1",
     "@vercel/ncc": "^0.45.0",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.3",
     "typescript": "^6.0.3",
-    "uuid": "^9.0.0"
+    "uuid": "^14.0.3"
   },
   "scripts": {
     "build": "ncc build src/index.ts",
