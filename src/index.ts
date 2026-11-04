@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import timers from "node:timers/promises";
 import * as core from "@actions/core";
-import { AMOClient, LICENSE_NAMES, isLicense } from "./amo";
+import { AMOClient, isLicense, LICENSE_NAMES } from "./amo";
 
 const CHECK_ADDON_STATUS_INTERVAL = 3000;
 const CHECK_ADDON_STATUS_TIMEOUT = 20000;

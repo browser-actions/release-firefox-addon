@@ -7,7 +7,7 @@
   "author": "Shin'ya Ueoka <ueokande@i-beam.org>",
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
+    "@biomejs/biome": "^2.6.4",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^26.6.6",
     "@types/uuid": "^9.0.2"
