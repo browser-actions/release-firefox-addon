@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.3.0](https://github.com/browser-actions/release-firefox-addon/compare/release-firefox-addon-v0.2.2...release-firefox-addon-v0.3.0) (2026-11-06)
+
+
+### Features
+
+* bump node version ([#18](https://github.com/browser-actions/release-firefox-addon/issues/18)) ([8c22321](https://github.com/browser-actions/release-firefox-addon/commit/8c2232194688b81a0f775e015109ff02f75812f2))
+* Initial experimental release ([e156bfe](https://github.com/browser-actions/release-firefox-addon/commit/e156bfed1025c760ed3ddcfab16a3dc6c8d70a22))
+
+
+### Bug Fixes
+
+* fix actions import ([08d2c1d](https://github.com/browser-actions/release-firefox-addon/commit/08d2c1ddfe342ae437c489b20e9bf99d49550e5c))
+* fix incorrect action.yml ([57dc0a1](https://github.com/browser-actions/release-firefox-addon/commit/57dc0a1fcd39306e0ba802b765d5c110d6af0bcf))
+* fix request error ([#21](https://github.com/browser-actions/release-firefox-addon/issues/21)) ([9eb188a](https://github.com/browser-actions/release-firefox-addon/commit/9eb188a8ce93a82ba38960e99c508026422121ad))
+* modernize dependencies and lock GitHub Actions ([#33](https://github.com/browser-actions/release-firefox-addon/issues/33)) ([d7ee1d6](https://github.com/browser-actions/release-firefox-addon/commit/d7ee1d6f07c13ad16e4379743fe3b23c06f510e2))
+* Rename package ([d0864e9](https://github.com/browser-actions/release-firefox-addon/commit/d0864e9f13dd002bd6c4ef63b460aacbcc38127f))
+* sign published tags and commits ([#16](https://github.com/browser-actions/release-firefox-addon/issues/16)) ([9ae1f08](https://github.com/browser-actions/release-firefox-addon/commit/9ae1f0888f31dbe7151168c2e6f237214053bc79))
+* update Node.js runtime to v24 LTS ([#30](https://github.com/browser-actions/release-firefox-addon/issues/30)) ([a2aa495](https://github.com/browser-actions/release-firefox-addon/commit/a2aa495dbf0786158a6faefb63155e7f9574b35d))
+* update source upload to use license var ([#12](https://github.com/browser-actions/release-firefox-addon/issues/12)) ([b892ced](https://github.com/browser-actions/release-firefox-addon/commit/b892ced1f2c353b3cd5e73d404e2e872bb0fc7b9))
+
 ## [0.2.2](https://github.com/browser-actions/release-firefox-addon/compare/release-firefox-addon-v0.2.1...release-firefox-addon-v0.2.2) (2026-11-06)
 
 
