@@ -1,11 +1,18 @@
 {
   "files": {
-    "ignore": ["./dist/", "package.json"]
+    "includes": [
+      "**",
+      "!**/package.json",
+      "!!**/dist",
+      "!**/*.md",
+      "!**/*.yml",
+      "!**/*.yaml"
+    ]
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "preset": "recommended"
     }
   },
   "formatter": {

@@ -2,8 +2,8 @@
   "compilerOptions": {
     "lib": ["es2021"],
     "target": "es2021",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
