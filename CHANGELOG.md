@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/browser-actions/release-firefox-addon/compare/release-firefox-addon-v0.2.1...release-firefox-addon-v0.2.2) (2026-11-06)
+
+
+### Bug Fixes
+
+* modernize dependencies and lock GitHub Actions ([#33](https://github.com/browser-actions/release-firefox-addon/issues/33)) ([d7ee1d6](https://github.com/browser-actions/release-firefox-addon/commit/d7ee1d6f07c13ad16e4379743fe3b23c06f510e2))
+* update Node.js runtime to v24 LTS ([#30](https://github.com/browser-actions/release-firefox-addon/issues/30)) ([a2aa495](https://github.com/browser-actions/release-firefox-addon/commit/a2aa495dbf0786158a6faefb63155e7f9574b35d))
+
 ## [0.2.1](https://github.com/browser-actions/release-firefox-addon/compare/release-firefox-addon-v0.2.0...release-firefox-addon-v0.2.1) (2024-07-26)
 
 
